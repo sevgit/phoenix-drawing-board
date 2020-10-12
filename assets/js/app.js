@@ -13,6 +13,6 @@ import "../css/app.scss"
 import socket from "./socket"
 import WyeCanvas from './wye_canvas'
 
-WyeCanvas.init(socket)
+const _wyeCanvas = new WyeCanvas(socket)
 //
 import "phoenix_html"
