@@ -8,7 +8,7 @@
 use Mix.Config
 
 config :elixir_channels,
-  ecto_repos: [ElixirChannels.Repo]
+  ecto_repos: []
 
 # Configures the endpoint
 config :elixir_channels, ElixirChannelsWeb.Endpoint,

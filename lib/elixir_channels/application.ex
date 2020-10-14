@@ -7,8 +7,6 @@ defmodule ElixirChannels.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      ElixirChannels.Repo,
       # Start the Telemetry supervisor
       ElixirChannelsWeb.Telemetry,
       # Start the PubSub system

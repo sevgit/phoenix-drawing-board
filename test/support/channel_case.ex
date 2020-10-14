@@ -27,14 +27,4 @@ defmodule ElixirChannelsWeb.ChannelCase do
       @endpoint ElixirChannelsWeb.Endpoint
     end
   end
-
-  setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ElixirChannels.Repo)
-
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ElixirChannels.Repo, {:shared, self()})
-    end
-
-    :ok
-  end
 end
