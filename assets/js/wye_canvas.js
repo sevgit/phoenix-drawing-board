@@ -1,3 +1,14 @@
+const colorList = [
+    '#FFADAD',
+    '#FFD6A5',
+    '#FDFFB6',
+    '#CAFFBF',
+    '#9BF6FF',
+    '#A0C4FF',
+    '#BDB2FF',
+    '#FFC6FF'
+];
+
 class WyeCanvas {
     constructor(socket) {
         this.socket = socket;
@@ -5,10 +16,12 @@ class WyeCanvas {
         this.channel.join();
         this.setupCanvases();
         this.setupListeners();
-        this.id = Math.random() * 100
+        this.id = Math.random() * 100;
+        this.color = colorList[Math.round(Math.random() * 8)];
     }
 
     setupCanvases = () => {
+        // Drawing canvas
         this.canvas = document.createElement('canvas');
         document.body.appendChild(this.canvas);
         document.body.style.margin = 0;
@@ -41,7 +54,7 @@ class WyeCanvas {
         })
     }
 
-    draw = ({ clientX, clientY, isDrawing, id }) => {
+    draw = ({ clientX, clientY, isDrawing, id, color }) => {
         if (id !== this.id) {
             this.cursorCtx.clearRect(0, 0, this.cursorCanvas.width, this.cursorCanvas.height);
             this.cursorCtx.drawImage(this.foreignCursor, clientX, clientY);
@@ -51,13 +64,13 @@ class WyeCanvas {
         this.ctx.moveTo(clientX, clientY);
         this.ctx.lineWidth = 5;
         this.ctx.lineCap = 'round';
-        this.ctx.strokeStyle = '#c0392b';
+        this.ctx.strokeStyle = color;
         this.ctx.lineTo(clientX, clientY);
         this.ctx.stroke();
     }
 
     shoutDrawing = ({ clientX, clientY, buttons }) => {
-        this.channel.push('shout', { clientX, clientY, isDrawing: buttons === 1, id: this.id })
+        this.channel.push('shout', { clientX, clientY, isDrawing: buttons === 1, id: this.id, color: this.color })
     }
 
 }
